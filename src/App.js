@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import RestoCard from './components/RestoCard'
 
 class App extends Component {
   constructor() {
@@ -31,15 +32,7 @@ class App extends Component {
       <div className="flex justify-center flex-wrap py-5">
         {this.state.restaurants.map(({restaurant}) => {
           return (
-            <div key={restaurant.id} className="mx-2 my-5 max-w-sm w-1/3 rounded overflow-hidden shadow-lg">
-            <img className="w-full" src={restaurant.thumb} alt="Sunset in the mountains" />
-            <div className="px-6 py-4">
-              <div className="font-bold text-xl mb-2">{restaurant.name}</div>
-              <p className="text-gray-700 text-base">
-                {restaurant.location.address}
-              </p>
-            </div>
-            </div>
+            <RestoCard restaurant={restaurant} key={restaurant.id}/>
           )
         })}
       </div>
