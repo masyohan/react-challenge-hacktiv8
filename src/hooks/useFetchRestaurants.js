@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-const url = 'https://developers.zomato.com/api/v2.1/search?entity_type=city&entity_id=';
+const url = 'https://developers.zomato.com/api/v2.1/search?count=18&entity_type=city&entity_id=';
 
 export default function useFetchRestaurants() {
     const [restaurants, setRestaurants] = useState([]);
@@ -32,7 +32,7 @@ export default function useFetchRestaurants() {
 
     return [
         {
-            restaurants, loading, error
+            restaurants, city, loading, error
         },
         {
             setCity

@@ -5,16 +5,16 @@ import ErrorMessage from '../components/ErrorMessage';
 import useFetchRestaurants from '../hooks/useFetchRestaurants';
 
 export default () => {
-    const [dataResto, customFunction] = useFetchRestaurants();
-    const { restaurants, loading, error } = dataResto;
-    const { setCity } = customFunction;
+    const [dataResto, restoFunction] = useFetchRestaurants();
+    const { restaurants, city, loading, error } = dataResto;
+    const { setCity } = restoFunction;
 
     return (
         <div className="flex flex-col">
             <div className="flex justify-center">
                 <form>
                     <div className="relative">
-                        <select onChange={(e) => setCity(e.target.value)} className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+                        <select value={city} onChange={(e) => setCity(e.target.value)} className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
                             <option value="74">Jakarta</option>
                             <option value="170">Bali</option>
                         </select>

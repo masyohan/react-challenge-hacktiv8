@@ -1,5 +1,5 @@
 import React from 'react';
 
 export default () => {
-    return <h1>Loading...</h1>
+    return <div className="lds-heart"><div></div></div>
 }
