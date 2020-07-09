@@ -1,20 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import RestoCard from '../components/RestoCard';
 import Loading from '../components/Loading';
 import ErrorMessage from '../components/ErrorMessage';
 import useFetchRestaurants from '../hooks/useFetchRestaurants';
+import { connect } from "react-redux";
+import { getRestaurants } from "../store/actions/restaurantAction";
 
-export default () => {
-    const [dataResto, restoFunction] = useFetchRestaurants();
-    const { restaurants, city, loading, error } = dataResto;
-    const { setCity } = restoFunction;
-
+function ListRestaurants(props) {
+    // const [dataResto, restoFunction] = useFetchRestaurants();
+    // const { restaurants, city, loading, error } = dataResto;
+    // const { setCity } = restoFunction;
+    useEffect(() => {
+        props.getRestaurants()
+    }, [])
     return (
         <div className="flex flex-col">
             <div className="flex justify-center">
                 <form>
                     <div className="relative">
-                        <select value={city} onChange={(e) => setCity(e.target.value)} className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+                        <select  className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
                             <option value="74">Jakarta</option>
                             <option value="170">Bali</option>
                         </select>
@@ -25,18 +29,17 @@ export default () => {
                 </form>
             </div>
             <div className="flex justify-center flex-wrap py-5">
-                {!loading &&restaurants.map(({restaurant}) => {
+                {props.restaurants.map(({restaurant}) => {
                 return (
                     <RestoCard restaurant={restaurant} key={restaurant.id}/>
                 )
                 })}
-                {
-                    loading && <Loading/>
-                }
-                {
-                    error && <ErrorMessage error={error}/>
-                }
             </div>
         </div>
     )
 }
+
+const mapStateToProps = (state) => ({ restaurants: state.restaurantReducer.restaurants });
+const mapDispatchToProps = { getRestaurants };
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListRestaurants);

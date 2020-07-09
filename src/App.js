@@ -6,19 +6,23 @@ import {
 } from "react-router-dom";
 import ListRestaurants from './pages/ListRestaurants';
 import DetailRestaurant from './pages/DetailRestaurant';
+import { Provider } from 'react-redux';
+import store from "./store";
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/">
-          <ListRestaurants/>
-        </Route>
-        <Route path="/restaurant/:id">
-          <DetailRestaurant/>
-        </Route>
-      </Switch>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <ListRestaurants/>
+          </Route>
+          <Route path="/restaurant/:id">
+            <DetailRestaurant/>
+          </Route>
+        </Switch>
+      </Router>
+    </Provider>
   )
 }
 
